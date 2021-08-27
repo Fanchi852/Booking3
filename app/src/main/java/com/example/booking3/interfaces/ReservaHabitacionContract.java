@@ -14,6 +14,7 @@ public interface ReservaHabitacionContract {
 
     public interface Presenter{
         void getReservaHabitacion();
+        void getReservaHabitacionBY(ReservaHabitacion reservaHabitacion);
     }
 
     public interface Model{
@@ -23,6 +24,7 @@ public interface ReservaHabitacionContract {
             void onFailure(String error);
         }
         void getReservaHabitacionService(ReservaHabitacionContract.Model.OnLstReservasHabitacionesListener reservaHabitacionListener);
+        void getReservaHabitacionServiceBY(ReservaHabitacionContract.Model.OnLstReservasHabitacionesListener reservaHabitacionListener, ReservaHabitacion reservaHabitacion);
 
     }
 

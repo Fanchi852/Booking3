@@ -15,6 +15,7 @@ public interface ReservaContract {
 
     public interface Presenter{
         void getReserva();
+        void getReservaBY(Reserva reserva);
     }
 
     public interface Model{
@@ -24,6 +25,7 @@ public interface ReservaContract {
             void onFailure(String error);
         }
         void getReservaService(ReservaContract.Model.OnLstReservasListener reservaListener);
+        void getReservaServiceBY(ReservaContract.Model.OnLstReservasListener reservaListener, Reserva reserva);
 
     }
 

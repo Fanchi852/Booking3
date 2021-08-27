@@ -35,4 +35,24 @@ public class ReservaHabitacionePresenter implements ReservaHabitacionContract.Pr
             }
         });
     }
+
+    @Override
+    public void getReservaHabitacionBY(ReservaHabitacion reservaHabitacion) {
+        model.getReservaHabitacionServiceBY(new ReservaHabitacionContract.Model.OnLstReservasHabitacionesListener() {
+            @Override
+            public void onInitLoading() {
+                vista.onInitLoading();
+            }
+
+            @Override
+            public void onFinished(ArrayList<ReservaHabitacion> lstReservasHabitaciones) {
+                vista.sucessLstReservasHabitaciones(lstReservasHabitaciones);
+            }
+
+            @Override
+            public void onFailure(String error) {
+                vista.failureLstReservasHabitaciones(error);
+            }
+        }, reservaHabitacion);
+    }
 }
