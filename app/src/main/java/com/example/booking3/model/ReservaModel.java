@@ -26,6 +26,8 @@ public class ReservaModel implements ReservaContract.Model {
 
             @Override
             public void onFailure(Call<ArrayList<Reserva>> call, Throwable t) {
+                System.out.println(t.getStackTrace().toString());
+                t.printStackTrace();
                 reservaListener.onFailure(t.getStackTrace().toString());
             }
         });
@@ -37,6 +39,7 @@ public class ReservaModel implements ReservaContract.Model {
 
         ApiAdapter apiclient = new ApiAdapter();
         Call<ArrayList<Reserva>> request = apiclient.getReservasBY(reserva);
+
 
         request.enqueue(new Callback<ArrayList<Reserva>>() {
             @Override

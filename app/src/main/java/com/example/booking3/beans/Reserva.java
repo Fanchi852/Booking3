@@ -5,9 +5,9 @@ import java.sql.Date;
 public class Reserva {
 
     private Integer id_cliente, id_hotel, habitaciones, id_reserva;
-    private Date fecha_entrada, fecha_salida;
+    private String fecha_entrada, fecha_salida;
 
-    public Reserva(Integer id_cliente, Integer id_hotel, Integer habitaciones, Integer id_reserva, Date fecha_entrada, Date fecha_salida) {
+    public Reserva(Integer id_cliente, Integer id_hotel, Integer habitaciones, Integer id_reserva, String fecha_entrada, String fecha_salida) {
         this.id_cliente = id_cliente;
         this.id_hotel = id_hotel;
         this.habitaciones = habitaciones;
@@ -51,20 +51,31 @@ public class Reserva {
         this.id_reserva = id_reserva;
     }
 
-    public Date getFecha_entrada() {
+    public String getFecha_entrada() {
         return fecha_entrada;
     }
 
-    public void setFecha_entrada(Date fecha_entrada) {
+    public void setFecha_entrada(String fecha_entrada) {
         this.fecha_entrada = fecha_entrada;
     }
 
-    public Date getFecha_salida() {
+    public String getFecha_salida() {
         return fecha_salida;
     }
 
-    public void setFecha_salida(Date fecha_salida) {
+    public void setFecha_salida(String fecha_salida) {
         this.fecha_salida = fecha_salida;
     }
 
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id_cliente=" + id_cliente +
+                ", id_hotel=" + id_hotel +
+                ", habitaciones=" + habitaciones +
+                ", id_reserva=" + id_reserva +
+                ", fecha_entrada='" + fecha_entrada + '\'' +
+                ", fecha_salida='" + fecha_salida + '\'' +
+                '}';
+    }
 }

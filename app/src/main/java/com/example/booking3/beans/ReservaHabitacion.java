@@ -37,4 +37,12 @@ public class ReservaHabitacion {
         this.id_habitacion = id_habitacion;
     }
 
+    @Override
+    public String toString() {
+        return "ReservaHabitacion{" +
+                "id_reservahabitacion=" + id_reservahabitacion +
+                ", id_reserva=" + id_reserva +
+                ", id_habitacion=" + id_habitacion +
+                '}';
+    }
 }
