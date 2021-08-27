@@ -16,6 +16,7 @@ public interface ReservaContract {
     public interface Presenter{
         void getReserva();
         void getReservaBY(Reserva reserva);
+        void addReserva(Reserva reserva);
     }
 
     public interface Model{
@@ -26,6 +27,7 @@ public interface ReservaContract {
         }
         void getReservaService(ReservaContract.Model.OnLstReservasListener reservaListener);
         void getReservaServiceBY(ReservaContract.Model.OnLstReservasListener reservaListener, Reserva reserva);
+        void addReservaService(ReservaContract.Model.OnLstReservasListener reservaListener, Reserva reserva);
 
     }
 

@@ -16,6 +16,8 @@ import com.example.booking3.presenter.UserPresenter;
 import com.example.booking3.view.CreateAccountActivity;
 import com.example.booking3.view.HotelListActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements UserContract.View{
 
     private EditText    email,pass;
@@ -62,8 +64,11 @@ public class MainActivity extends AppCompatActivity implements UserContract.View
     }
 
     @Override
-    public void sucessLogin(Boolean login) {
+    public void sucessLogin(ArrayList<Cliente> cliente) {
         Intent i = new Intent(getApplicationContext(), HotelListActivity.class);
+        Bundle data = new Bundle();
+        data.putInt("id_cliente", cliente.get(0).getId_cliente());
+        i.putExtras(data);
         startActivity(i);
         progressBar.setVisibility(View.GONE);
     }

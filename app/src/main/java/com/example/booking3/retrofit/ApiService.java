@@ -26,7 +26,7 @@ public interface ApiService {
     );
 
     @GET("Controller?ACTION=CLIENTE.ADD")
-    Call<ArrayList<Cliente>> addCliente(
+    Call<Boolean> addCliente(
             @Query("TELEFONO") Integer telefono,
             @Query("DIRECCION") String direccion,
             @Query("EMAIL") String email,
@@ -55,6 +55,15 @@ public interface ApiService {
     Call<ArrayList<Reserva>> getReservaBY(
             @Query("id_reserva") Integer id_reserva
             );
+
+    @GET("Controller?ACTION=RESERVA.ADD")
+    Call<ArrayList<Reserva>> addReserva(
+            @Query("ID_CLIENTE") Integer id_cliente,
+            @Query("ID_HOTELA") Integer id_hotel,
+            @Query("HABITACIONES") Integer habitaciones,
+            @Query("FECHA_ENTRADA") String fecha_entrada,
+            @Query("FECHA_SALIDA") String fecha_salida
+    );
 
     /*---- RESERVASHABITACIONES ----*/
 

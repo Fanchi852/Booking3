@@ -31,7 +31,6 @@ public class ReservaModel implements ReservaContract.Model {
                 reservaListener.onFailure(t.getStackTrace().toString());
             }
         });
-
     }
 
     @Override
@@ -52,6 +51,25 @@ public class ReservaModel implements ReservaContract.Model {
                 reservaListener.onFailure(t.getStackTrace().toString());
             }
         });
+    }
 
+    @Override
+    public void addReservaService(OnLstReservasListener reservaListener, Reserva reserva) {
+
+        ApiAdapter apiclient = new ApiAdapter();
+        Call<ArrayList<Reserva>> request = apiclient.addReservas(reserva);
+
+        request.enqueue(new Callback<ArrayList<Reserva>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Reserva>> call, Response<ArrayList<Reserva>> response) {
+                reservaListener.onFinished(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Reserva>> call, Throwable t) {
+                t.printStackTrace();
+                reservaListener.onFailure(t.getMessage());
+            }
+        });
     }
 }

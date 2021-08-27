@@ -1,11 +1,14 @@
 package com.example.booking3.beans;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reserva {
 
     private Integer id_cliente, id_hotel, habitaciones, id_reserva;
     private String fecha_entrada, fecha_salida;
+
+    private List<ReservaHabitacion> reservasHabitaciones;
 
     public Reserva(Integer id_cliente, Integer id_hotel, Integer habitaciones, Integer id_reserva, String fecha_entrada, String fecha_salida) {
         this.id_cliente = id_cliente;
@@ -65,6 +68,14 @@ public class Reserva {
 
     public void setFecha_salida(String fecha_salida) {
         this.fecha_salida = fecha_salida;
+    }
+
+    public List<ReservaHabitacion> getReservasHabitaciones() {
+        return reservasHabitaciones;
+    }
+
+    public void setReservasHabitaciones(List<ReservaHabitacion> reservasHabitaciones) {
+        this.reservasHabitaciones = reservasHabitaciones != null ? reservasHabitaciones : new ArrayList<>();
     }
 
     @Override

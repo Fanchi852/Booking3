@@ -6,13 +6,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Hotel {
 
-    private Integer id_hotel, estrellas, puntuacion, id_categoria, votos, habitaciones, habitaciones_libres;
+    private Integer id_hotel, estrellas, puntuacion, id_categoria, votos, habitaciones;
     private String direccion, nombre;
 
     private Categoria categoria;
+    private List<Reserva> reservas;
 
     public Hotel(Integer id_hotel, Integer estrellas, Integer puntuacion, Integer id_categoria, Integer votos, Integer habitaciones, String direccion, String nombre) {
         this.id_hotel = id_hotel;
@@ -101,6 +103,20 @@ public class Hotel {
         this.categoria = categoria;
     }
 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas, HashMap<Integer, List<ReservaHabitacion>> reservasHabitacionesMap) {
+        this.reservas = reservas;
+        if (this.reservas==null){
+            this.reservas = new ArrayList<>();
+        }
+        for (Reserva reserva : this.reservas){
+            reserva.setReservasHabitaciones(reservasHabitacionesMap.get(reserva.getId_reserva()));
+        }
+    }
+
     public static ArrayList<Hotel> getArrayListFromJSon(JSONArray datos){
         ArrayList<Hotel> lista = null;
         Hotel hotel = null;
@@ -185,6 +201,16 @@ public class Hotel {
                 ", nombre='" + nombre + '\'' +
                 ", categoria='" + ((categoria != null) ? categoria.toString() : "") + '\'' +
                 '}';
+    }
+
+    public int getHabitacionesDisponibles() {
+        Integer result = habitaciones;
+
+        for(Reserva reserva : reservas){
+            result -= reserva.getReservasHabitaciones().size();
+        }
+
+        return result;
     }
 }
 

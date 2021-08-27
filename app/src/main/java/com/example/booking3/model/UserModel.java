@@ -49,16 +49,20 @@ public class UserModel implements UserContract.Model{
         System.out.println("model");
 
         ApiAdapter apiclient = new ApiAdapter();
-        Call<ArrayList<Cliente>> request = apiclient.addClient(cliente);
-        request.enqueue(new Callback<ArrayList<Cliente>>() {
+        Call<Boolean> request = apiclient.addClient(cliente);
+        request.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<ArrayList<Cliente>> call, Response<ArrayList<Cliente>> response) {
-                userListener.onFinished(response.body());
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                System.out.println(response.body());
+                ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+                clientes.add(cliente);
+                userListener.onFinished(clientes);
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Cliente>> call, Throwable t) {
-
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                t.printStackTrace();
+                userListener.onFailure(t.getMessage());
             }
         });
     }
