@@ -1,16 +1,16 @@
 package com.example.booking3.beans;
 
-public class Reservahabitacion {
+public class ReservaHabitacion {
 
     private Integer id_reservahabitacion, id_reserva, id_habitacion;
 
-    public Reservahabitacion(Integer id_reservahabitacion, Integer id_reserva, Integer id_habitacion) {
+    public ReservaHabitacion(Integer id_reservahabitacion, Integer id_reserva, Integer id_habitacion) {
         this.id_reservahabitacion = id_reservahabitacion;
         this.id_reserva = id_reserva;
         this.id_habitacion = id_habitacion;
     }
 
-    public Reservahabitacion() {
+    public ReservaHabitacion() {
     }
 
     public Integer getId_reservahabitacion() {

@@ -150,10 +150,17 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
         ArrayList<Hotel> lstHoteles = new ArrayList<>();
         for (Hotel hotel : hotelesMap.values()) {
             hotel.setCategoria(categoriasMap.get(hotel.getId_categoria()));
+
+            if (!hotelFiltro.isEmpty()){
+                if (hotelFiltro.get("fecha_entrada") != null){
+
+                }
+            }
+
             lstHoteles.add(hotel);
         }
 
-        for()
+
 
         adapter = new HotelAdapter(lstHoteles,this);
         recyclre.setAdapter(adapter);

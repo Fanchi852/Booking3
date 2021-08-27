@@ -4,16 +4,13 @@ package com.example.booking3.retrofit;
 import com.example.booking3.beans.Categoria;
 import com.example.booking3.beans.Cliente;
 import com.example.booking3.beans.Hotel;
+import com.example.booking3.beans.Reserva;
+import com.example.booking3.beans.ReservaHabitacion;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
-import retrofit2.http.HTTP;
-import retrofit2.http.PATCH;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -42,13 +39,19 @@ public interface ApiService {
     @GET("Controller?ACTION=HOTEL.FIND_ALL")
     Call<ArrayList<Hotel>> getHoteles();
 
-
-
     /*---- CATEGORIA ----*/
 
     @GET("Controller?ACTION=CATEGORIA.FIND_ALL")
     Call<ArrayList<Categoria>> getCategoriaBY();
 
+    /*---- RESERVAS ----*/
 
+    @GET("Controller?ACTION=RESERVA.FIND_ALL")
+    Call<ArrayList<Reserva>> getReservaAll();
+
+    /*---- RESERVASHABITACIONES ----*/
+
+    @GET("Controller?ACTION=RESERVAHABITACION.FIND_ALL")
+    Call<ArrayList<ReservaHabitacion>> getReservaHabitacionAll();
 
 }
