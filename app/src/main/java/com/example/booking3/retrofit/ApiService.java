@@ -3,7 +3,9 @@ package com.example.booking3.retrofit;
 
 import com.example.booking3.beans.Categoria;
 import com.example.booking3.beans.Cliente;
+import com.example.booking3.beans.Habitacion;
 import com.example.booking3.beans.Hotel;
+import com.example.booking3.beans.Puntuacion;
 import com.example.booking3.beans.Reserva;
 import com.example.booking3.beans.ReservaHabitacion;
 
@@ -42,16 +44,45 @@ public interface ApiService {
     /*---- CATEGORIA ----*/
 
     @GET("Controller?ACTION=CATEGORIA.FIND_ALL")
-    Call<ArrayList<Categoria>> getCategoriaBY();
+    Call<ArrayList<Categoria>> getCategoriaALL();
 
     /*---- RESERVAS ----*/
 
     @GET("Controller?ACTION=RESERVA.FIND_ALL")
     Call<ArrayList<Reserva>> getReservaAll();
 
+    @GET("Controller?ACTION=RESERVA.FIND_BY")
+    Call<ArrayList<Reserva>> getReservaBY(
+            @Query("id_reserva") Integer id_reserva
+            );
+
     /*---- RESERVASHABITACIONES ----*/
 
     @GET("Controller?ACTION=RESERVAHABITACION.FIND_ALL")
     Call<ArrayList<ReservaHabitacion>> getReservaHabitacionAll();
 
+    @GET("Controller?ACTION=RESERVAHABITACION.FIND_BY")
+    Call<ArrayList<ReservaHabitacion>> getReservaHabitacionBY(
+            @Query("id_reservahabitacion") Integer id_reservahabitacion
+    );
+
+    /*---- HABITACIONES ----*/
+
+    @GET("Controller?ACTION=HABITACION.FIND_ALL")
+    Call<ArrayList<Habitacion>> getHabitacionAll();
+
+    @GET("Controller?ACTION=HABITACION.FIND_BY")
+    Call<ArrayList<Habitacion>> getHabitacionBY(
+            @Query("id_habitacion") Integer id_habitacion
+    );
+
+    /*---- PUNTUACIONES ----*/
+
+    @GET("Controller?ACTION=PUNTUACION.FIND_ALL")
+    Call<ArrayList<Puntuacion>> getPuntuacionAll();
+
+    @GET("Controller?ACTION=PUNTUACION.FIND_BY")
+    Call<ArrayList<Puntuacion>> getPuntuacionBY(
+            @Query("id_puntuacion") Integer id_puntuacion
+    );
 }

@@ -31,4 +31,23 @@ public class ReservaHabitacionModel implements ReservaHabitacionContract.Model {
         });
 
     }
+
+    public void getReservaHabitacionServiceBY(OnLstReservasHabitacionesListener reservaHabitacionListener, ReservaHabitacion reservaHabitacion) {
+
+        ApiAdapter apiclient = new ApiAdapter();
+        Call<ArrayList<ReservaHabitacion>> request = apiclient.getReservasHabitacionesBY(reservaHabitacion);
+
+        request.enqueue(new Callback<ArrayList<ReservaHabitacion>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ReservaHabitacion>> call, Response<ArrayList<ReservaHabitacion>> response) {
+                reservaHabitacionListener.onFinished(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ReservaHabitacion>> call, Throwable t) {
+                reservaHabitacionListener.onFailure(t.getStackTrace().toString());
+            }
+        });
+
+    }
 }

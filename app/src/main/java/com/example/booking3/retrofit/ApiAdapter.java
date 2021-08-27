@@ -3,7 +3,9 @@ package com.example.booking3.retrofit;
 
 import com.example.booking3.beans.Categoria;
 import com.example.booking3.beans.Cliente;
+import com.example.booking3.beans.Habitacion;
 import com.example.booking3.beans.Hotel;
+import com.example.booking3.beans.Puntuacion;
 import com.example.booking3.beans.Reserva;
 import com.example.booking3.beans.ReservaHabitacion;
 import com.example.booking3.utils.Constantes;
@@ -51,7 +53,7 @@ public class ApiAdapter {
     public Call<ArrayList<Categoria>> getCategorias(){
 
         ApiService service = retrofit.create(ApiService.class);
-        return service.getCategoriaBY();
+        return service.getCategoriaALL();
     }
 
     /*---- RESERVAS ----*/
@@ -62,12 +64,52 @@ public class ApiAdapter {
         return service.getReservaAll();
     }
 
-    /*---- RESERVAS ----*/
+    public Call<ArrayList<Reserva>> getReservasBY(Reserva reserva){
+
+        ApiService service = retrofit.create(ApiService.class);
+        return service.getReservaBY(reserva.getId_reserva());
+    }
+
+    /*---- RESERVASHABITACION ----*/
 
     public Call<ArrayList<ReservaHabitacion>> getReservasHabitaciones(){
 
         ApiService service = retrofit.create(ApiService.class);
         return service.getReservaHabitacionAll();
+    }
+
+    public Call<ArrayList<ReservaHabitacion>> getReservasHabitacionesBY(ReservaHabitacion reservaHabitacion){
+
+        ApiService service = retrofit.create(ApiService.class);
+        return service.getReservaHabitacionBY(reservaHabitacion.getId_reservahabitacion());
+    }
+
+    /*---- HABITACION ----*/
+
+    public Call<ArrayList<Habitacion>> getHabitaciones(){
+
+        ApiService service = retrofit.create(ApiService.class);
+        return service.getHabitacionAll();
+    }
+
+    public Call<ArrayList<Habitacion>> getHabitacionesBY(Habitacion habitacion){
+
+        ApiService service = retrofit.create(ApiService.class);
+        return service.getHabitacionBY(habitacion.getId_habitacion());
+    }
+
+    /*---- PUNTUACION ----*/
+
+    public Call<ArrayList<Puntuacion>> getPuntuaciones(){
+
+        ApiService service = retrofit.create(ApiService.class);
+        return service.getPuntuacionAll();
+    }
+
+    public Call<ArrayList<Puntuacion>> getPuntuacionesBY(Puntuacion puntuacion){
+
+        ApiService service = retrofit.create(ApiService.class);
+        return service.getPuntuacionBY(puntuacion.getId_puntuacion());
     }
 
 }
