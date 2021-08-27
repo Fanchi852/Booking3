@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import com.example.booking3.R;
 import com.example.booking3.adapter.HotelAdapter;
 import com.example.booking3.beans.Categoria;
-import com.example.booking3.beans.Habitacion;
 import com.example.booking3.beans.Hotel;
 import com.example.booking3.beans.Reserva;
 import com.example.booking3.beans.ReservaHabitacion;
@@ -58,6 +57,7 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
     private HashMap<String, String> hotelFiltro;
     private DateFormat dateFormat;
 
+    private Bundle clienteData;
 
     ProgressBar progressBar;
 
@@ -65,6 +65,8 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_list);
+
+        clienteData = getIntent().getExtras();
 
         btfiltro = findViewById(R.id.btfiltro);
         filtrospinner = findViewById(R.id.filtrospinner);
@@ -245,14 +247,17 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
         for (Hotel hotel : hotelesMap.values()) {
             System.out.println("parsehotel - en el for");
             hotel.setCategoria(categoriasMap.get(hotel.getId_categoria()));
+            hotel.setReservas(reservasMap.get(hotel.getId_hotel()), reservasHabitacionesMap);
+
 
             if(cumpleFiltro(hotel)){
+
                 lstHoteles.add(hotel);
             }
 
         }
         System.out.println("parsehotel - tras el for");
-        adapter = new HotelAdapter(lstHoteles,this);
+        adapter = new HotelAdapter(lstHoteles, clienteData, this);
         recyclre.setAdapter(adapter);
         progressBar.setVisibility(View.GONE);
         recyclre.setVisibility(View.VISIBLE);

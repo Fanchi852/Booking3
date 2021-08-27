@@ -3,6 +3,7 @@ package com.example.booking3.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelviewHolder> {
 
     private Activity activity;
+    private Bundle clienteData;
 
     private ArrayList<Hotel> lstHoteles;
 
@@ -46,8 +48,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelviewHol
         }
     }
 
-    public HotelAdapter(ArrayList<Hotel> lstHoteles, Activity activity) {
+    public HotelAdapter(ArrayList<Hotel> lstHoteles, Bundle clienteData, Activity activity) {
         this.lstHoteles = lstHoteles;
+        this.clienteData = clienteData;
         this.activity = activity;
     }
 
@@ -75,6 +78,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelviewHol
                 String hoteltoJson = gson.toJson(lstHoteles.get(position));
                 Intent intent = new Intent(activity, ViewHotelActivity.class);
                 intent.putExtra("HOTEL_DATA", hoteltoJson);
+                intent.putExtra("id_cliente", clienteData.getInt("id_cliente"));
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     Explode explode = new Explode();
                     explode.setDuration(1000);

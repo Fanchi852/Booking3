@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface UserContract {
 
     public interface View{
-        void sucessLogin (Boolean login);
+        void sucessLogin (ArrayList<Cliente> cliente);
         void failureLogin (String message );
         void onInitLoading();
     }

@@ -14,6 +14,8 @@ import com.example.booking3.beans.Cliente;
 import com.example.booking3.interfaces.UserContract;
 import com.example.booking3.presenter.UserPresenter;
 
+import java.util.ArrayList;
+
 public class CreateAccountActivity extends AppCompatActivity implements UserContract.View{
 
     EditText addres,name,email,pass,tlf,dni,last_name;
@@ -61,7 +63,7 @@ public class CreateAccountActivity extends AppCompatActivity implements UserCont
     }
 
     @Override
-    public void sucessLogin(Boolean login) {
+    public void sucessLogin(ArrayList<Cliente> cliente) {
 
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);

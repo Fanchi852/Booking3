@@ -55,4 +55,24 @@ public class ReservaPresenter implements ReservaContract.Presenter {
             }
         }, reserva);
     }
+
+    @Override
+    public void addReserva(Reserva reserva) {
+        model.addReservaService(new ReservaContract.Model.OnLstReservasListener() {
+            @Override
+            public void onInitLoading() {
+                vista.onInitLoading();
+            }
+
+            @Override
+            public void onFinished(ArrayList<Reserva> lstReservas) {
+                vista.sucessLstReservas(lstReservas);
+            }
+
+            @Override
+            public void onFailure(String error) {
+                vista.failureLstReservas(error);
+            }
+        }, reserva);
+    }
 }

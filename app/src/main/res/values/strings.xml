@@ -21,4 +21,5 @@
     <string name="numero_de_habitaciones">Nº Habitaciones</string>
     <string name="numero_de_botos">Nº Votos</string>
     <string name="puntuacion_media">Puntuacion media</string>
+    <string name="habitaciones_disponibles">Habitaciones disponibles</string>
 </resources>

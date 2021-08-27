@@ -35,7 +35,7 @@ public class UserPresenter implements UserContract.Presenter {
                     vista.failureLogin("el usuario o la contraseña con incorrectos");
                 }else{
                     System.out.println("este es el cliente: "+cliente.toString());
-                    vista.sucessLogin(true);
+                    vista.sucessLogin(cliente);
                 }
             }
 
@@ -59,7 +59,7 @@ public class UserPresenter implements UserContract.Presenter {
             @Override
             public void onFinished(ArrayList<Cliente> cliente) {
 
-                vista.sucessLogin(true);
+                vista.sucessLogin(cliente);
 
             }
 
