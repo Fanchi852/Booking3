@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Primary"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="1dp"
+            android:src="@drawable/booking"
+            app:civ_border_color="@color/Accent"
+            app:civ_border_width="4dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_regis_email"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_email"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/regis_email"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til__regis_pass"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_pass"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/login_pass"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_regis_tlf"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_tlf"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/regis_tlf"
+                    android:inputType="phone"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_regis_name"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_name"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/regis_name"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_regis_last_name"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_last_name"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/regis_last_name"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_regis_dni"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_dni"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/regis_dni"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_regis_address"
+                android:layout_width="@dimen/text_imput_width"
+                android:layout_height="@dimen/text_input_height"
+                android:layout_marginLeft="@dimen/text_imput_marginleft"
+                android:layout_marginTop="@dimen/text_imput_margintop">
+
+                <EditText
+                    android:id="@+id/campo_regis_address"
+                    android:layout_width="@dimen/edittext_imput_width"
+                    android:layout_height="@dimen/edittext_imput_height"
+                    android:ems="10"
+                    android:hint="@string/regis_adress"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/regisbt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/regis_button_regist">
+
+            </Button>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

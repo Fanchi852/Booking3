@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Primary"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/booking"
+            app:civ_border_color="@color/Accent"
+            app:civ_border_width="4dp" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="@dimen/text_imput_width"
+            android:layout_height="@dimen/text_input_height"
+            android:layout_marginLeft="@dimen/text_imput_marginleft"
+            android:layout_marginTop="@dimen/text_imput_margintop">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="@dimen/edittext_imput_width"
+                android:layout_height="@dimen/edittext_imput_height"
+                android:ems="10"
+                android:text="asd@asd.asd"
+                android:hint="@string/login_email"
+                android:inputType="text"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_pass"
+            android:layout_width="@dimen/text_imput_width"
+            android:layout_height="@dimen/text_input_height"
+            android:layout_marginLeft="@dimen/text_imput_marginleft"
+            android:layout_marginTop="@dimen/text_imput_margintop">
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="@dimen/edittext_imput_width"
+                android:layout_height="@dimen/edittext_imput_height"
+                android:ems="10"
+                android:text="asdasd"
+                android:hint="@string/login_pass"
+                android:inputType="text"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/login_button">
+
+        </Button>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/aun_no_tienes_cuenta">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <Button
+                android:id="@+id/regis"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/registrate_aqui" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+    </ProgressBar>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

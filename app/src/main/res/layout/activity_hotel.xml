@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/PrimaryDark"
+    android:src="@drawable/booking">
+
+    <TextView
+        android:id="@+id/puntuacion"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignEnd="@+id/habitaciones"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="1dp"
+        android:text="@string/puntuacion_media" />
+
+    <TextView
+        android:id="@+id/categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/direccion"
+        android:layout_alignStart="@+id/direccion"
+        android:layout_alignEnd="@+id/hotel_name"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/habitaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categoria_txt"
+        android:layout_alignStart="@+id/categoria_txt"
+        android:layout_alignEnd="@+id/categoria"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/votos"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignEnd="@+id/habitaciones"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="match_parent"
+        android:layout_height="206dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/booking" />
+
+    <TextView
+        android:id="@+id/hotel_name"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="-381dp"
+        android:layout_marginTop="222dp"
+        android:layout_toRightOf="@+id/imagen"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/direccion"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hotel_name"
+        android:layout_alignLeft="@+id/hotel_name"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <View
+        android:id="@+id/linea"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_above="@+id/compartir"
+        android:layout_toRightOf="@+id/imagen"
+        android:background="@color/Accent">
+
+    </View>
+
+    <ImageView
+        android:id="@+id/compartir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/material_blue_grey_800" />
+
+    <TextView
+        android:id="@+id/categoria_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/direccion"
+        android:layout_alignStart="@+id/direccion"
+        android:layout_alignEnd="@+id/direccion"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="0dp"
+        android:text="@string/Categoria" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categoria_txt"
+        android:layout_alignStart="@+id/categoria_txt"
+        android:layout_alignEnd="@+id/categoria_txt"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:text="@string/numero_de_habitaciones" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:text="@string/numero_de_botos" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="122dp"
+        android:text="Fecha Entrada"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/fechaentrada"
+        android:layout_width="129dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/textView5"
+        android:text="Fecha Salida"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/fechasalida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_alignEnd="@+id/textView6"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_alignEnd="@+id/estrellitas"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/textView6"
+        android:text="Habitaciones disponibles"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/numerohabitaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_alignEnd="@+id/textView7"
+        android:layout_alignBottom="@+id/fechasalida"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="" />
+
+    <Button
+        android:id="@+id/btfiltro"
+        android:layout_width="358dp"
+        android:layout_height="99dp"
+        android:layout_below="@+id/numerohabitaciones"
+        android:layout_alignStart="@+id/fechaentrada"
+        android:layout_alignEnd="@+id/numerohabitaciones"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="Reservar" />
+
+    <RatingBar
+        android:id="@+id/estrellitas"
+        android:layout_width="358dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView21"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="-90dp" />
+
+
+</RelativeLayout>

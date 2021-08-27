@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="375dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/hotelsimple"
+        android:layout_width="wrap_content"
+        android:layout_height="360dp"
+        android:background="@color/PrimaryDark"
+        android:src="@drawable/booking">
+
+        <ImageView
+            android:id="@+id/imagen"
+            android:layout_width="match_parent"
+            android:layout_height="206dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/booking" />
+
+        <TextView
+            android:id="@+id/hotel_name"
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="-381dp"
+            android:layout_marginTop="222dp"
+            android:layout_toRightOf="@+id/imagen"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/direccion"
+            android:layout_width="191dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel_name"
+            android:layout_alignLeft="@+id/hotel_name"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <View
+            android:id="@+id/linea"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_above="@+id/compartir"
+            android:layout_toRightOf="@+id/imagen"
+            android:background="@color/Accent">
+
+        </View>
+
+        <ImageView
+            android:id="@+id/compartir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/material_blue_grey_800" />
+
+        <TextView
+            android:id="@+id/categoria_txt"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/direccion"
+            android:layout_alignStart="@+id/direccion"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="12dp"
+            android:text="TextView" />
+
+        <RatingBar
+            android:id="@+id/estrellitas"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/direccion"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/categoria_txt" />
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

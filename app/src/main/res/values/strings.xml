@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Booking3</string>
+    <string name="login_email">Email</string>
+    <string name="login_pass">Contraseña</string>
+    <string name="login_button">login</string>
+    <string name="regis_dni">DNI</string>
+    <string name="regis_last_name">Apellidos</string>
+    <string name="regis_tlf">Telefono</string>
+    <string name="regis_email">Email</string>
+    <string name="regis_name">Nombre</string>
+    <string name="regis_adress">Direccion</string>
+    <string name="regis_button_regist">REGISTRATE</string>
+    <string name="aun_no_tienes_cuenta">¿Aun no tienes cuenta?</string>
+    <string name="registrate_aqui">Registrate aqui</string>
+    <string name="fecha_entrada">Fecha entrada</string>
+    <string name="fecha_salida">Fecha salida</string>
+    <string name="direccion">Direccion</string>
+    <string name="personas">Personas</string>
+    <string name="filtros">Filtros</string>
+    <string name="Categoria">Categoria</string>
+    <string name="numero_de_habitaciones">Nº Habitaciones</string>
+    <string name="numero_de_botos">Nº Votos</string>
+    <string name="puntuacion_media">Puntuacion media</string>
+</resources>
