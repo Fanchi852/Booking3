@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +24,11 @@ import com.example.booking3.interfaces.ReservaContract;
 import com.example.booking3.presenter.ReservaPresenter;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +38,12 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
     private TextView hotel_name, direccion, categoria, habitaciones, votos, puntuacion, habitacionesDisponibles, precioreserva, fechasalidareserva, fechaentradareserva;
     private RatingBar estrellitas;
     private ImageView imagen;
-    private Button btfiltro, buttonseleccionhabitaciones;
+    private Button btreserva, buttonseleccionhabitaciones;
     private ProgressBar progressBar;
 
     ViewHotelActivity myself;
 
+    private DateFormat dateFormat;
 
     private Hotel hotel;
     private ReservaPresenter reservaPresenter;
@@ -65,7 +69,7 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
         habitacionesSeleccionadasIndex = new ArrayList<>();
         habitacionesSeleccionadas = new ArrayList<>();
 
-        habitacionesDisponibles.setText(String.valueOf(hotel.getHabitacionesDisponibles(fechas)));
+        habitacionesDisponibles.setText(String.valueOf(hotel.getHabitacionesDisponibles(fechas).size()));
         hotel_name.setText(hotel.getNombre());
         direccion.setText(hotel.getDireccion());
         categoria.setText(hotel.getCategoria().getNombre());
@@ -89,7 +93,7 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
                 Map<String,String> fechas = new HashMap<>();
                 fechas.put("fecha_entrada", fechaentradareserva.getText().toString());
                 fechas.put("fecha_salida", fechasalidareserva.getText().toString());
-                habitacionesDisponibles.setText(String.valueOf(hotel.getHabitacionesDisponibles(fechas)));
+                habitacionesDisponibles.setText(String.valueOf(hotel.getHabitacionesDisponibles(fechas).size()));
             }
 
             @Override
@@ -108,14 +112,13 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 System.out.println("Editando");
 
-                System.out.println("i: " + i);
-                System.out.println("i1: " + i1);
-                System.out.println("i2: " + i2);
+                habitacionesSeleccionadasIndex.clear();
+                habitacionesSeleccionadas.clear();
 
                 Map<String,String> fechas = new HashMap<>();
                 fechas.put("fecha_entrada", fechaentradareserva.getText().toString());
                 fechas.put("fecha_salida", fechasalidareserva.getText().toString());
-                habitacionesDisponibles.setText(String.valueOf(hotel.getHabitacionesDisponibles(fechas)));
+                habitacionesDisponibles.setText(String.valueOf(hotel.getHabitacionesDisponibles(fechas).size()));
             }
 
             @Override
@@ -127,30 +130,33 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
         buttonseleccionhabitaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!checkFecha(fechaentradareserva.getText().toString()) || !checkFecha(fechasalidareserva.getText().toString())){
+                    showMessageOnFinish("Error", "Es necesario seleccionar ambas fechas.");
+                    return;
+                }
+
                 habitacionesSeleccionadasIndex.clear();
                 habitacionesSeleccionadas.clear();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(myself);
 
-                List<Habitacion> habitacionesHotel = hotel.getListHabitaciones();
-                List<Reserva> reservasHotel = hotel.getReservas();
+                Map<String,String> fechas = new HashMap<>();
+                fechas.put("fecha_entrada", fechaentradareserva.getText().toString());
+                fechas.put("fecha_salida", fechasalidareserva.getText().toString());
+
+                List<Habitacion> habitacionesHotel = hotel.getHabitacionesDisponibles(fechas);
 
                 Map<Integer, Habitacion> habitacionesHotelMap = new HashMap<>();
                 for(Habitacion habitacion: habitacionesHotel){
                     habitacionesHotelMap.put(habitacion.getId_habitacion(), habitacion);
                 }
 
-                for(Reserva reserva: reservasHotel){
-                    for(ReservaHabitacion reservaHabitacion: reserva.getReservasHabitaciones()){
-                        if(habitacionesHotelMap.containsKey(reservaHabitacion.getId_habitacion())){
-                            habitacionesHotelMap.remove(reservaHabitacion.getId_habitacion());
-                        }
-                    }
-                }
+                System.out.println("habitacionesHotelMap: " + habitacionesHotelMap);
 
                 String[] arrayOptions = new String[habitacionesHotelMap.keySet().size()];
                 Integer index = 0;
                 for(Habitacion habitacion: habitacionesHotelMap.values()){
+                    System.out.println("Habitacion: " + habitacion.getNombre() + ", Precio: " + habitacion.getPrecio());
                     arrayOptions[index] = habitacion.getNombre() + ": " + habitacion.getPrecio() + "€";
                     index++;
                 }
@@ -196,12 +202,17 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
         });
 
 
-        btfiltro.setOnClickListener(new View.OnClickListener() {
+        btreserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(habitacionesSeleccionadas.isEmpty()){
                     showMessageOnFinish("Error", "Es necesario seleccionar habitaciones.");
+                    return;
+                }
+
+                if(!checkFecha(fechaentradareserva.getText().toString()) || !checkFecha(fechasalidareserva.getText().toString())){
+                    showMessageOnFinish("Error", "Es necesario seleccionar ambas fechas.");
                     return;
                 }
 
@@ -230,6 +241,20 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
 
     }
 
+    private boolean checkFecha(String dateString) {
+        Boolean result = true;
+        if(dateFormat==null) {
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        }
+        try {
+            dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println("Error de conversion de fecha: " + e.getMessage());
+            result = false;
+        }
+        return result;
+    }
+
     private void initComponents(){
         hotel_name = findViewById(R.id.hotel_name);
         direccion = findViewById(R.id.direccion);
@@ -239,7 +264,7 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
         puntuacion = findViewById(R.id.puntuacion);
         estrellitas = findViewById(R.id.estrellitas);
         habitacionesDisponibles = findViewById(R.id.habitacionesDisponibles);
-        btfiltro = findViewById(R.id.btfiltro);
+        btreserva = findViewById(R.id.btreserva);
         precioreserva = findViewById(R.id.precioreserva);
         fechasalidareserva= findViewById(R.id.fechasalidareserva);
         fechaentradareserva = findViewById(R.id.fechaentradareserva);
@@ -252,6 +277,9 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
     @Override
     public void sucessLstReservas(ArrayList<Reserva> lstReservas) {
         showMessageOnFinish("Success", "Reserva registrada con exito");
+
+        Intent intent = new Intent(getApplicationContext(), HotelListActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -278,14 +306,6 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
 
         /* GESTION DE CARGA */
         progressBar.setVisibility(View.GONE);
-
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                Intent intent = new Intent(getApplicationContext(), HotelListActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
 }
