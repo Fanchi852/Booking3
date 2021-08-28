@@ -75,7 +75,7 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
 
         clienteData = getIntent().getExtras();
 
-        btfiltro = findViewById(R.id.btfiltro);
+        btfiltro = findViewById(R.id.btreserva);
         filtrospinner = findViewById(R.id.filtrospinner);
         DireccionEdit = findViewById(R.id.DireccionEdit);
         numeroDePersonas = findViewById(R.id.numeroDePersonas);
