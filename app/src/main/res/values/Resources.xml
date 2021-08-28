@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="filtrospinnerdata">
+        <item>Seleccionar filtro</item>
         <item>10 hoteles con mas reservas</item>
         <item>Destacados</item>
         <item>Precios mas caros</item>
-        <item>recios mas baratos</item>
-        <item>puntuacion de usuarios</item>
+        <item>Precios mas baratos</item>
+        <item>Puntuacion de usuarios</item>
     </string-array>
 </resources>

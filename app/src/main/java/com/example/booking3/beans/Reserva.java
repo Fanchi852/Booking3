@@ -17,6 +17,7 @@ public class Reserva {
         this.id_reserva = id_reserva;
         this.fecha_entrada = fecha_entrada;
         this.fecha_salida = fecha_salida;
+        this.reservasHabitaciones = new ArrayList<>();
     }
 
     public Reserva() {
@@ -74,8 +75,8 @@ public class Reserva {
         return reservasHabitaciones;
     }
 
-    public void setReservasHabitaciones(List<ReservaHabitacion> reservasHabitaciones) {
-        this.reservasHabitaciones = reservasHabitaciones != null ? reservasHabitaciones : new ArrayList<>();
+    public void setReservasHabitaciones(List<ReservaHabitacion> reservasHabitacionesInput) {
+        this.reservasHabitaciones = reservasHabitacionesInput != null ? reservasHabitacionesInput : new ArrayList<>();
     }
 
     @Override
@@ -87,6 +88,7 @@ public class Reserva {
                 ", id_reserva=" + id_reserva +
                 ", fecha_entrada='" + fecha_entrada + '\'' +
                 ", fecha_salida='" + fecha_salida + '\'' +
+                ", reservasHabitaciones=" + reservasHabitaciones +
                 '}';
     }
 }
