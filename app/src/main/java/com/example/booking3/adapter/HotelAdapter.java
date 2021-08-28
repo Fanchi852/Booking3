@@ -23,13 +23,14 @@ import com.example.booking3.view.ViewHotelActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelviewHolder> {
 
     private Activity activity;
     private Bundle clienteData;
 
-    private ArrayList<Hotel> lstHoteles;
+    private List<Hotel> lstHoteles;
 
     public class HotelviewHolder extends RecyclerView.ViewHolder {
 
@@ -48,7 +49,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelviewHol
         }
     }
 
-    public HotelAdapter(ArrayList<Hotel> lstHoteles, Bundle clienteData, Activity activity) {
+    public HotelAdapter(List<Hotel> lstHoteles, Bundle clienteData, Activity activity) {
         this.lstHoteles = lstHoteles;
         this.clienteData = clienteData;
         this.activity = activity;

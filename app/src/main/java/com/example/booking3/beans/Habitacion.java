@@ -56,4 +56,14 @@ public class Habitacion {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+        return "Habitacion{" +
+                "id_habitacion=" + id_habitacion +
+                ", precio=" + precio +
+                ", id_hotel=" + id_hotel +
+                ", descripcion='" + descripcion + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

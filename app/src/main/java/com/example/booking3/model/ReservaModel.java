@@ -1,5 +1,6 @@
 package com.example.booking3.model;
 
+import com.example.booking3.beans.Cliente;
 import com.example.booking3.beans.Hotel;
 import com.example.booking3.beans.Reserva;
 import com.example.booking3.interfaces.ReservaContract;
@@ -57,16 +58,24 @@ public class ReservaModel implements ReservaContract.Model {
     public void addReservaService(OnLstReservasListener reservaListener, Reserva reserva) {
 
         ApiAdapter apiclient = new ApiAdapter();
-        Call<ArrayList<Reserva>> request = apiclient.addReservas(reserva);
+        Call<Object> request = apiclient.addReservas(reserva);
 
-        request.enqueue(new Callback<ArrayList<Reserva>>() {
+        request.enqueue(new Callback<Object>() {
             @Override
-            public void onResponse(Call<ArrayList<Reserva>> call, Response<ArrayList<Reserva>> response) {
-                reservaListener.onFinished(response.body());
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                System.out.println(response.body());
+                Boolean res = (Boolean) response.body();
+                if(res){
+                    ArrayList<Reserva> reservas = new ArrayList<>();
+                    reservas.add(reserva);
+                    reservaListener.onFinished(reservas);
+                }else{
+                    reservaListener.onFailure("Error");
+                }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Reserva>> call, Throwable t) {
+            public void onFailure(Call<Object> call, Throwable t) {
                 t.printStackTrace();
                 reservaListener.onFailure(t.getMessage());
             }

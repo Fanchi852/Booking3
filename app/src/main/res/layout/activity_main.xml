@@ -40,7 +40,7 @@
                 android:layout_width="@dimen/edittext_imput_width"
                 android:layout_height="@dimen/edittext_imput_height"
                 android:ems="10"
-                android:text="asd@asd.asd"
+                android:text=""
                 android:hint="@string/login_email"
                 android:inputType="text"
                 android:singleLine="true" />
@@ -58,7 +58,7 @@
                 android:layout_width="@dimen/edittext_imput_width"
                 android:layout_height="@dimen/edittext_imput_height"
                 android:ems="10"
-                android:text="asdasd"
+                android:text=""
                 android:hint="@string/login_pass"
                 android:inputType="text"
                 android:singleLine="true" />

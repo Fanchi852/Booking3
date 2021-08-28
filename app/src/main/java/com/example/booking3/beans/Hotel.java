@@ -4,17 +4,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Hotel {
+public class Hotel implements Comparable<Hotel> {
 
     private Integer id_hotel, estrellas, puntuacion, id_categoria, votos, habitaciones;
     private String direccion, nombre;
 
     private Categoria categoria;
     private List<Reserva> reservas;
+    private List<Habitacion> listHabitaciones;
+    private String compareMode;
+    private DateFormat dateFormat;
 
     public Hotel(Integer id_hotel, Integer estrellas, Integer puntuacion, Integer id_categoria, Integer votos, Integer habitaciones, String direccion, String nombre) {
         this.id_hotel = id_hotel;
@@ -24,8 +32,9 @@ public class Hotel {
         this.votos = votos;
         this.habitaciones = habitaciones;
         this.direccion = direccion;
+        this.categoria = new Categoria();
         this.nombre = nombre;
-
+        this.reservas = new ArrayList<>();
     }
 
     public Hotel() {
@@ -108,13 +117,11 @@ public class Hotel {
     }
 
     public void setReservas(List<Reserva> reservas, HashMap<Integer, List<ReservaHabitacion>> reservasHabitacionesMap) {
-        this.reservas = reservas;
-        if (this.reservas==null){
-            this.reservas = new ArrayList<>();
-        }
+        this.reservas = reservas != null ? reservas : new ArrayList<>();
         for (Reserva reserva : this.reservas){
             reserva.setReservasHabitaciones(reservasHabitacionesMap.get(reserva.getId_reserva()));
         }
+        System.out.println("Hotel: " + this.nombre + ", Reservas: " + this.reservas);
     }
 
     public static ArrayList<Hotel> getArrayListFromJSon(JSONArray datos){
@@ -199,19 +206,141 @@ public class Hotel {
                 ", habitaciones=" + habitaciones +
                 ", direccion='" + direccion + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", categoria='" + ((categoria != null) ? categoria.toString() : "") + '\'' +
+                ", categoria=" + categoria +
+                ", reservas=" + reservas +
                 '}';
     }
 
-    public int getHabitacionesDisponibles() {
+    public int getHabitacionesDisponibles(Map<String, String> fechas) {
         Integer result = habitaciones;
+        if(!reservas.isEmpty() && !fechas.isEmpty()){
+            String fechaEntradaFiltroString = !fechas.get("fecha_entrada").isEmpty() ? fechas.get("fecha_entrada") : "";
+            String fechaSalidaFiltroString = !fechas.get("fecha_salida").isEmpty() ? fechas.get("fecha_salida") : "";
 
-        for(Reserva reserva : reservas){
-            result -= reserva.getReservasHabitaciones().size();
+            Date fechaEntradaFiltro = getDateFromString(fechaEntradaFiltroString);
+            Date fechaSalidaFiltro = getDateFromString(fechaSalidaFiltroString);
+
+            System.out.println("fechaEntradaFiltro: "+fechaEntradaFiltro);
+            System.out.println("fechaSalidaFiltro; "+fechaSalidaFiltro);
+
+            for(Reserva reserva:reservas){
+                Date fechaEntradaReserva = getDateFromString(reserva.getFecha_entrada());
+                Date fechaSalidaReserva = getDateFromString(reserva.getFecha_salida());
+
+                System.out.println("fechaEntradaReserva: "+fechaEntradaReserva);
+                System.out.println("fechaSalidaReserva; "+fechaSalidaReserva);
+
+                if(fechaEntradaFiltro != null && fechaSalidaFiltro != null){
+                    Boolean fechasMenores = fechaEntradaFiltro.before(fechaEntradaReserva) && fechaSalidaFiltro.before(fechaEntradaReserva);
+                    Boolean fechasMayores = fechaEntradaFiltro.after(fechaSalidaReserva) && fechaSalidaFiltro.after(fechaSalidaReserva);
+                    if(!fechasMenores && !fechasMayores){
+                        System.out.println("Fecha no disponible en la reserva: " + reserva);
+                        result -= reserva.getReservasHabitaciones().size();
+                    }
+                }else if(fechaEntradaFiltro != null){
+                    Boolean fueraDeRango = fechaEntradaFiltro.before(fechaEntradaReserva) || fechaEntradaFiltro.after(fechaSalidaReserva);
+                    if(!fueraDeRango){
+                        System.out.println("Fecha no disponible en la reserva: " + reserva);
+                        result -= reserva.getReservasHabitaciones().size();
+                    }
+                }else if(fechaSalidaFiltro != null){
+                    Boolean fueraDeRango = fechaSalidaFiltro.before(fechaEntradaReserva) || fechaSalidaFiltro.after(fechaSalidaReserva);
+                    if(!fueraDeRango){
+                        System.out.println("Fecha no disponible en la reserva: " + reserva);
+                        result -= reserva.getReservasHabitaciones().size();
+                    }
+                }
+            }
         }
+        /*
+        else {
+            System.out.println("habitaciones: " + habitaciones);
+
+            System.out.println("Hotel: " + this.nombre + ", Reservas: " + this.reservas);
+            for(Reserva reserva : reservas){
+                System.out.println("Reservas habitaciones: " + reserva.getReservasHabitaciones());
+                result -= reserva.getReservasHabitaciones().size();
+            }
+
+            System.out.println("disponibles: " + result);
+        }
+*/
 
         return result;
     }
+
+    public Double getPrecioHotel(String operacion){
+        Double result = 0.0;
+        Double precioTotal = 0.0;
+        Double precioMaximo = 0.0;
+        Double precioMinimo = 0.0;
+        for(Habitacion habitacion: listHabitaciones){
+            precioTotal += habitacion.getPrecio();
+            precioMaximo = precioMaximo > habitacion.getPrecio() ? precioMaximo : habitacion.getPrecio();
+            precioMinimo = precioMinimo < habitacion.getPrecio() ? precioMinimo : habitacion.getPrecio();
+        }
+        switch(operacion){
+            case "Medio":
+                result = precioTotal/listHabitaciones.size();
+                break;
+            case "Maximo":
+                result = precioMaximo;
+                break;
+            case "Minimo":
+                result = precioMinimo;
+                break;
+        }
+        return result;
+    }
+
+    public void setCompareMode(String mode){
+        this.compareMode = mode;
+    }
+
+    @Override
+    public int compareTo(Hotel hotelInput) {
+        Integer result = 0;
+        switch(this.compareMode){
+            case "Reservas":
+                result = hotelInput.getReservas().size() - this.reservas.size();
+                break;
+            case "Destacado":
+                result = hotelInput.getEstrellas() - this.estrellas;
+                break;
+            case "PrecioMasAlto":
+                result = (int) (hotelInput.getPrecioHotel("Maximo") - getPrecioHotel("Maximo"));
+                break;
+            case "PreciosMasBbaratos":
+                result = (int) (getPrecioHotel("Maximo") - hotelInput.getPrecioHotel("Maximo"));
+                break;
+            case "Puntuecion":
+                result = hotelInput.getPuntuacion() - this.puntuacion;
+                break;
+        }
+        return result;
+    }
+
+    public List<Habitacion> getListHabitaciones() {
+        return listHabitaciones;
+    }
+
+    public void setListHabitaciones(List<Habitacion> listHabitaciones) {
+        this.listHabitaciones = listHabitaciones;
+    }
+
+    public Date getDateFromString(String dateString){
+        if(dateFormat==null) {
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        }
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println("Error de conversion de fecha: " + e.getMessage());
+        }
+        return date;
+    }
+
 }
 
 

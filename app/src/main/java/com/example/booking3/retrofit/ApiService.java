@@ -10,6 +10,7 @@ import com.example.booking3.beans.Reserva;
 import com.example.booking3.beans.ReservaHabitacion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,7 +27,7 @@ public interface ApiService {
     );
 
     @GET("Controller?ACTION=CLIENTE.ADD")
-    Call<Boolean> addCliente(
+    Call<Object> addCliente(
             @Query("TELEFONO") Integer telefono,
             @Query("DIRECCION") String direccion,
             @Query("EMAIL") String email,
@@ -57,12 +58,13 @@ public interface ApiService {
             );
 
     @GET("Controller?ACTION=RESERVA.ADD")
-    Call<ArrayList<Reserva>> addReserva(
+    Call<Object> addReserva(
             @Query("ID_CLIENTE") Integer id_cliente,
             @Query("ID_HOTELA") Integer id_hotel,
             @Query("HABITACIONES") Integer habitaciones,
             @Query("FECHA_ENTRADA") String fecha_entrada,
-            @Query("FECHA_SALIDA") String fecha_salida
+            @Query("FECHA_SALIDA") String fecha_salida,
+            @Query("RESERVAS_HABITACIONES") List<ReservaHabitacion> reservas_habitaciones
     );
 
     /*---- RESERVASHABITACIONES ----*/

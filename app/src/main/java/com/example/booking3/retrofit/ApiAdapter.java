@@ -34,7 +34,7 @@ public class ApiAdapter {
         return service.getClienteBY(cliente.getEmail(), cliente.getContrasena());
     }
 
-    public Call<Boolean> addClient(Cliente cliente){
+    public Call<Object> addClient(Cliente cliente){
 
         ApiService service = retrofit.create(ApiService.class);
         return service.addCliente(cliente.getTelefono(), cliente.getDireccion(), cliente.getEmail(), cliente.getContrasena(), cliente.getDni(), cliente.getApellido(), cliente.getNombre());
@@ -70,10 +70,10 @@ public class ApiAdapter {
         return service.getReservaBY(reserva.getId_reserva());
     }
 
-    public Call<ArrayList<Reserva>> addReservas(Reserva reserva){
+    public Call<Object> addReservas(Reserva reserva){
 
         ApiService service = retrofit.create(ApiService.class);
-        return service.addReserva(reserva.getId_cliente(), reserva.getId_hotel(), reserva.getHabitaciones(), reserva.getFecha_entrada(), reserva.getFecha_salida());
+        return service.addReserva(reserva.getId_cliente(), reserva.getId_hotel(), reserva.getHabitaciones(), reserva.getFecha_entrada(), reserva.getFecha_salida(), reserva.getReservasHabitaciones());
     }
 
     /*---- RESERVASHABITACION ----*/

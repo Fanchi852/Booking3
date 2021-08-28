@@ -57,31 +57,27 @@ public class MainActivity extends AppCompatActivity implements UserContract.View
         regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), CreateAccountActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     @Override
     public void sucessLogin(ArrayList<Cliente> cliente) {
-        Intent i = new Intent(getApplicationContext(), HotelListActivity.class);
-        Bundle data = new Bundle();
-        data.putInt("id_cliente", cliente.get(0).getId_cliente());
-        i.putExtras(data);
-        startActivity(i);
-        progressBar.setVisibility(View.GONE);
+        showMessageOnFinish("Success", "Usuario logueado correctamente");
+
+        Bundle clienteData = new Bundle();
+        clienteData.putInt("id_cliente", cliente.get(0).getId_cliente());
+
+        Intent intent = new Intent(getApplicationContext(), HotelListActivity.class);
+        intent.putExtras(clienteData);
+        startActivity(intent);
     }
 
     @Override
     public void failureLogin(String message) {
-        System.out.println("error en el login" + message);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message);
-        builder.setTitle("-- ERROR --");
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        progressBar.setVisibility(View.GONE);
+        showMessageOnFinish("Error", "No se pudo loguear al usuario");
     }
 
     @Override
@@ -89,6 +85,17 @@ public class MainActivity extends AppCompatActivity implements UserContract.View
         progressBar.setMax(10);
         progressBar.setProgress(0);
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void showMessageOnFinish(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setTitle(title);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        /* GESTION DE CARGA */
+        progressBar.setVisibility(View.GONE);
     }
 
 }

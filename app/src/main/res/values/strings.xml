@@ -22,4 +22,6 @@
     <string name="numero_de_botos">Nº Votos</string>
     <string name="puntuacion_media">Puntuacion media</string>
     <string name="habitaciones_disponibles">Habitaciones disponibles</string>
+    <string name="precio_final">Precio final</string>
+    <string name="seleccionar_habitaciones">Seleccionar habitaciones</string>
 </resources>
