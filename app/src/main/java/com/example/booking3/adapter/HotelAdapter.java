@@ -75,11 +75,16 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelviewHol
         viewHolder.hotelsimple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Hotel selectedHotel = lstHoteles.get(position);
+                selectedHotel.prepareForJson();
+
                 Gson gson = new Gson();
-                String hoteltoJson = gson.toJson(lstHoteles.get(position));
+                String hoteltoJson = gson.toJson(selectedHotel);
+
                 Intent intent = new Intent(activity, ViewHotelActivity.class);
                 intent.putExtra("HOTEL_DATA", hoteltoJson);
                 intent.putExtra("id_cliente", clienteData.getInt("id_cliente"));
+
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     Explode explode = new Explode();
                     explode.setDuration(1000);

@@ -44,7 +44,7 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
     ViewHotelActivity myself;
 
     private DateFormat dateFormat;
-
+    private Integer id_cliente;
     private Hotel hotel;
     private ReservaPresenter reservaPresenter;
 
@@ -58,10 +58,11 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
 
         myself = this;
 
-        Integer id_cliente = getIntent().getIntExtra("id_cliente", 0);
+        id_cliente = getIntent().getIntExtra("id_cliente", 0);
         String jsonHotel = getIntent().getStringExtra("HOTEL_DATA");
         Gson gson = new Gson();
         Map<String,String> fechas = new HashMap<>();
+        System.out.println("jsonHotel: " + jsonHotel);
         hotel = gson.fromJson(jsonHotel, Hotel.class);
 
         initComponents();
@@ -279,6 +280,7 @@ public class ViewHotelActivity extends AppCompatActivity implements ReservaContr
         showMessageOnFinish("Success", "Reserva registrada con exito");
 
         Intent intent = new Intent(getApplicationContext(), HotelListActivity.class);
+        intent.putExtra("id_cliente", id_cliente);
         startActivity(intent);
     }
 
