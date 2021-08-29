@@ -342,6 +342,9 @@ public class Hotel implements Comparable<Hotel> {
         return date;
     }
 
+    public void prepareForJson() {
+        this.dateFormat = null;
+    }
 }
 
 

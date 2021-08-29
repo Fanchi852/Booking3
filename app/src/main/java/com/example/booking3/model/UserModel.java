@@ -31,8 +31,12 @@ public class UserModel implements UserContract.Model{
         request.enqueue(new Callback<ArrayList<Cliente>>() {
             @Override
             public void onResponse(Call<ArrayList<Cliente>> call, Response<ArrayList<Cliente>> response) {
-                System.out.println("id del primer cliente: "+response.body().get(0).getId_cliente());
-                userListener.onFinished(response.body());
+                if (!response.body().isEmpty()) {
+                    System.out.println("id del primer cliente: " + response.body());
+                    userListener.onFinished(response.body());
+                }else{
+                    userListener.onFailure("error durante el login");
+                }
             }
 
             @Override

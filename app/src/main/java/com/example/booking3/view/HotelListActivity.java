@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HotelListActivity extends AppCompatActivity implements HotelContract.View, CategoriaContract.View, ReservaContract.View, ReservaHabitacionContract.View, HabitacionContract.View {
 
@@ -355,8 +356,6 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
             return true;
         }
 
-        Integer habitacionesDisponibles = hotel.getHabitaciones();
-        List<Reserva> listaReservas = hotel.getReservas();
         Boolean result = true;
 
         System.out.println(hotel.toString());
@@ -375,45 +374,8 @@ public class HotelListActivity extends AppCompatActivity implements HotelContrac
         }
 
         /* FILTRO FECHAS */
-        if(!listaReservas.isEmpty()){
-            String fechaEntradaFiltroString = !hotelFiltro.get("fecha_entrada").isEmpty() ? hotelFiltro.get("fecha_entrada") : "";
-            String fechaSalidaFiltroString = !hotelFiltro.get("fecha_salida").isEmpty() ? hotelFiltro.get("fecha_salida") : "";
-
-            Date fechaEntradaFiltro = getDateFromString(fechaEntradaFiltroString);
-            Date fechaSalidaFiltro = getDateFromString(fechaSalidaFiltroString);
-
-            System.out.println("fechaEntradaFiltro: "+fechaEntradaFiltro);
-            System.out.println("fechaSalidaFiltro; "+fechaSalidaFiltro);
-
-            for(Reserva reserva:listaReservas){
-                Date fechaEntradaReserva = getDateFromString(reserva.getFecha_entrada());
-                Date fechaSalidaReserva = getDateFromString(reserva.getFecha_salida());
-
-                System.out.println("fechaEntradaReserva: "+fechaEntradaReserva);
-                System.out.println("fechaSalidaReserva; "+fechaSalidaReserva);
-
-                if(fechaEntradaFiltro != null && fechaSalidaFiltro != null){
-                    Boolean fechasMenores = fechaEntradaFiltro.before(fechaEntradaReserva) && fechaSalidaFiltro.before(fechaEntradaReserva);
-                    Boolean fechasMayores = fechaEntradaFiltro.after(fechaSalidaReserva) && fechaSalidaFiltro.after(fechaSalidaReserva);
-                    if(!fechasMenores && !fechasMayores){
-                        System.out.println("Fecha no disponible en la reserva: " + reserva);
-                        habitacionesDisponibles -= reserva.getReservasHabitaciones().size();
-                    }
-                }else if(fechaEntradaFiltro != null){
-                    Boolean fueraDeRango = fechaEntradaFiltro.before(fechaEntradaReserva) || fechaEntradaFiltro.after(fechaSalidaReserva);
-                    if(!fueraDeRango){
-                        System.out.println("Fecha no disponible en la reserva: " + reserva);
-                        habitacionesDisponibles -= reserva.getReservasHabitaciones().size();
-                    }
-                }else if(fechaSalidaFiltro != null){
-                    Boolean fueraDeRango = fechaSalidaFiltro.before(fechaEntradaReserva) || fechaSalidaFiltro.after(fechaSalidaReserva);
-                    if(!fueraDeRango){
-                        System.out.println("Fecha no disponible en la reserva: " + reserva);
-                        habitacionesDisponibles -= reserva.getReservasHabitaciones().size();
-                    }
-                }
-            }
-        }
+        List<Habitacion> habitacionesHotel = hotel.getHabitacionesDisponibles(hotelFiltro);
+        Integer habitacionesDisponibles = habitacionesHotel.size();
 
         /* FILTRO NUMERO DE PERSONAS */
         if (!hotelFiltro.get("numero_personas").isEmpty()){
